@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        {% extends 'base.html' %}
+        {% block content %}
+            <h1>{{ header }}</h1>
+            <table id="stats">
+                <tr>
+                    <th>hard</th>
+                    <th>soft</th>
+                    <th>split</th>
+                </tr>
+                <tr>
+                    <td>{{correct_hard}} out of {{total_hard}}</td>
+                    <td>{{correct_soft}} out of {{total_soft}}</td>
+                    <td>{{correct_split}} out of {{total_split}}</td>
+                </tr>
+                <tr>
+                    <td>{{percentage_hard}}</td>
+                    <td>{{percentage_soft}}</td>
+                    <td>{{percentage_split}}</td>
+                </tr>
+            </table>
+        {% endblock %}
+    </body>
+</html>

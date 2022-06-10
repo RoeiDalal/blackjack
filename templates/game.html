@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        {% extends 'base.html' %}
+
+        {% block content %}
+        <h1>{{ header }}</h1>
+        <form action="{{ url_for('set_game')}}" method="post">
+            
+            <table id="game">
+                <tr>
+                    <td><h2 id="counter">counter: {{ counter }}</h2></td>
+                    <td><h2 id="result" id="{{ correct }}">{{ correct }}</h2></td>
+                </tr>
+                <tr>
+                    <td><img class="cards" id="backcard" src="../static/cards/backcard.png"></td>
+                    <td><img class="cards" src="{{ dealer }}"></td>
+                </tr>
+                <tr>
+                    <td><img class="cards" src="{{ card1 }}"></td>
+                    <td><img class="cards" src="{{ card2 }}"></td>
+                </tr>
+                <tr>
+                    <td><button class="button" id="stand" type="submit" name="button" value="stand">stand</button></td>
+                    <td><button class="button" id="hit" type="submit" name="button" value="hit">hit</button></td>
+                </tr>
+                <tr>
+                    <td><button class="button" id="double" type="submit" name="button" value="double">double</button></td>
+                    <td><button class="button" id="split" type="submit" name="button" value="split">split</button></td>
+                </tr>
+            </table>
+        </form>
+        {% endblock %}
+    </body>
+</html>
