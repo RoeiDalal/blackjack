@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongo-express
+  name: {{ .Values.express.name }}
   labels:
-    app: mongo-express
+    app: {{ .Values.express.name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mongo-express
+      app: {{ .Values.express.name }}
   template:
     metadata:
       labels:
-        app: mongo-express
+        app: {{ .Values.express.name }}
     spec:
       containers:
-      - name: mongo-express
-        image: mongo-express
+      - name: {{ .Values.express.name }}
+        image: {{ .Values.express.image }}
         ports:
-        - containerPort: 8081
+        - containerPort: {{ .Values.express.port }}
         env:
         - name: ME_CONFIG_MONGODB_ADMINUSERNAME
           valueFrom:

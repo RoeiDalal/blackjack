@@ -1,0 +1,15 @@
+app:
+  name: "bj"
+  image: "bj"
+  port: 8080
+
+mongo:
+  name: "mongo"
+  image: "mongo"
+  port: 27017
+
+express:
+  name: "mongo-express"
+  image: "mongo-express"
+  port: 8081
+  
