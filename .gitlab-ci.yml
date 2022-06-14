@@ -21,8 +21,10 @@ build_image:
 
 deploy:
   stage: deploy_docker
+  image: centos
   before_script:
-    - apt-get update && apt-get install -y docker && apt-get install -y docker-compose
+    - yum update && yum install -y docker && yum install -y docker-compose
+    - systemctl start docker
   script:
     - docker pull $IMAGE_NAME:$IMAGE_TAG
     - docker tag $IMAGE_NAME:$IMAGE_TAG bj:latest
