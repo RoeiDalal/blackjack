@@ -5,6 +5,7 @@ variables:
 stages:
   - "build"
   - "deploy_docker"
+  - "deploy_k8s"
 
 build_image:
   stage: build
@@ -18,8 +19,9 @@ build_image:
   script:
     - docker build -t $IMAGE_NAME:$IMAGE_TAG .
     - docker push $IMAGE_NAME:$IMAGE_TAG
+  when: manual
 
-deploy:
+deploy_docker:
   stage: deploy_docker
   image: docker:20.10.16
   services:
@@ -30,3 +32,10 @@ deploy:
     - docker pull $IMAGE_NAME:$IMAGE_TAG
     - docker tag $IMAGE_NAME:$IMAGE_TAG bj:latest
     - docker-compose up -d
+  when: manual
+
+deploy_k8s:
+  stage: deploy_k8s
+  script:
+    - helm install blackjack blackjack
+  when: manual
