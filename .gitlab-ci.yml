@@ -1,0 +1,6 @@
+build_image:
+  before_script:
+    - docker login registry.gitlab.com -u $REGISTRY_USER -p $REGISTRY_PASS
+  script:
+    - docker build -t registry.gitlab.com/roeidalal/blackjack .
+    - docker push registry.gitlab.com/roeidalal/blackjack
