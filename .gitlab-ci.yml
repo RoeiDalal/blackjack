@@ -1,4 +1,5 @@
 build_image:
+  image: docker
   before_script:
     - docker login registry.gitlab.com -u $REGISTRY_USER -p $REGISTRY_PASS
   script:
