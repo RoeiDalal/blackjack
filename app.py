@@ -116,7 +116,7 @@ def set_game():
     round_count = card_values[str(hand['card1'])] + card_values[str(hand['card2'])] + card_values[str(hand['dealer'])]
     global counter
     counter = round_count + counter
-    #records.insert_one(record)
+    records.insert_one(record)
     distribute_cards()
     dealer = path+get_card_image(hand['dealer'])
     card1 = path+get_card_image(hand['card1'])
@@ -139,7 +139,22 @@ def stats():
     correct_hard = records.count_documents({"type":"hard","correct":True})
     correct_soft = records.count_documents({"type":"soft","correct":True})
     correct_split = records.count_documents({"type":"split","correct":True})
-    return render_template('stats.html',header="statistics",total_hard=total_hard,correct_hard=correct_hard,total_soft=total_soft,correct_soft=correct_soft,total_split=total_split,correct_split=correct_split)
+    if total_hard > 0:
+        percentage_hard = str(round((correct_hard/total_hard)*100,1)) +"%"
+    else:
+        percentage_hard = "no data"
+
+    if total_soft > 0:
+        percentage_soft = str(round((correct_soft/total_soft)*100,1)) +"%"
+    else:
+        percentage_soft = "no data"
+
+    if total_split > 0:
+        percentage_split = str(round((correct_split/total_split)*100,1)) +"%"
+    else:
+        percentage_split = "no data"
+
+    return render_template('stats.html',header="statistics",total_hard=total_hard,correct_hard=correct_hard,total_soft=total_soft,correct_soft=correct_soft,total_split=total_split,correct_split=correct_split,percentage_hard=percentage_hard,percentage_soft=percentage_soft,percentage_split=percentage_split)
 
 @app.route('/rules')
 def rules():

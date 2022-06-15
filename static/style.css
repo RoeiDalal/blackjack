@@ -107,6 +107,7 @@ p{
 #stats, #stats th, #stats td{
     border: 1px solid white;
     border-collapse: collapse;
+    padding: 25px;
 }
 
 #stats{
@@ -118,11 +119,11 @@ p{
 }
 
 #stats th{
-    font-size: 24px;
+    font-size: 36px;
 }
 
 #stats td{
-    font-size: 18px;
+    font-size: 36px;
 }
 
 h2{
