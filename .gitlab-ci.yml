@@ -37,5 +37,7 @@ deploy_docker:
 deploy_k8s:
   stage: deploy_k8s
   script:
+    - docker pull $IMAGE_NAME:$IMAGE_TAG
+    - docker tag $IMAGE_NAME:$IMAGE_TAG bj:latest
     - helm install blackjack blackjack
   when: manual
