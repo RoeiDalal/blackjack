@@ -1,6 +1,6 @@
 import re
 from unittest import result
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 import pymongo
 import random
 import datetime
@@ -64,21 +64,24 @@ def check_result(card1, card2, dealer, answer, type):
     if type == "split":
         if split_df.loc[card1-2][str(dealer)]:
             if answer == "split":
-                return True
+                return True, "split"
             else:
-                return False
+                return False, "split"
         else:
             type = "hard"
             
     elif type == "soft":
         if card1 == 14:
-            return soft_df.loc[card2-2][str(dealer)] == answer
+            result = soft_df.loc[card2-2][str(dealer)]
+            return result == answer, result
         elif card2 == 14:
-            return soft_df.loc[card1-2][str(dealer)] == answer
+            result = soft_df.loc[card1-2][str(dealer)]
+            return result == answer, result
 
     if type == "hard":
         player = sum_cards(card1,card2)
-        return hard_df.loc[player-4][str(dealer)] == answer
+        result = hard_df.loc[player-4][str(dealer)]
+        return result == answer, result
 
 def get_card_image(num):
     return cards_df.loc[random.randint(0,3)][str(num)]
@@ -109,16 +112,16 @@ def set_game():
     record['player'] = sum
     record['dealer'] = hand['dealer']
     record['answer'] = request.form['button']
-    record['correct'] = check_result(record['card1'], record['card2'], record['dealer'],record['answer'],type)
+    record['correct'],answer = check_result(record['card1'], record['card2'], record['dealer'],record['answer'],type)
     round_count = card_values[str(hand['card1'])] + card_values[str(hand['card2'])] + card_values[str(hand['dealer'])]
     global counter
     counter = round_count + counter
-    records.insert_one(record)
+    #records.insert_one(record)
     distribute_cards()
     dealer = path+get_card_image(hand['dealer'])
     card1 = path+get_card_image(hand['card1'])
     card2 = path+get_card_image(hand['card2'])
-    return render_template('game.html',header="Blackjack", dealer=dealer, card1=card1, card2=card2, correct=record['correct'], counter=counter)
+    return render_template('game.html',header="Blackjack", dealer=dealer, card1=card1, card2=card2, correct=record['correct'], counter=counter, answer=answer)
 
 @app.route('/game', methods=['GET'])
 def get_game():
@@ -137,5 +140,9 @@ def stats():
     correct_soft = records.count_documents({"type":"soft","correct":True})
     correct_split = records.count_documents({"type":"split","correct":True})
     return render_template('stats.html',header="statistics",total_hard=total_hard,correct_hard=correct_hard,total_soft=total_soft,correct_soft=correct_soft,total_split=total_split,correct_split=correct_split)
+
+@app.route('/rules')
+def rules():
+    return render_template('rules.html',header="Blackjack") 
 
 app.run(host='0.0.0.0', port=8080)

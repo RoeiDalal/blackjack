@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head></head>
+    <body>
+        {% extends 'base.html' %}
+        {% block content %}
+            <h1>{{ header }}</h1>
+            <table id="rules">
+                <tr>
+                    <th><img src="../static/cards/2_of_hearts.png"></th>
+                    <th><img src="../static/cards/3_of_hearts.png"></th>
+                    <th><img src="../static/cards/4_of_hearts.png"></th>
+                    <th><img src="../static/cards/5_of_hearts.png"></th>
+                    <th><img src="../static/cards/6_of_hearts.png"></th>
+                    <th><img src="../static/cards/7_of_hearts.png"></th>
+                    <th><img src="../static/cards/8_of_hearts.png"></th>
+                    <th><img src="../static/cards/9_of_hearts.png"></th>
+                    <th><img src="../static/cards/10_of_hearts.png"></th>
+                    <th><img src="../static/cards/jack_of_hearts.png"></th>
+                    <th><img src="../static/cards/queen_of_hearts.png"></th>
+                    <th><img src="../static/cards/king_of_hearts.png"></th>
+                    <th><img src="../static/cards/ace_of_hearts.png"></th>
+                </tr>
+                <tr>
+                    <td colspan="5">+1</td>
+                    <td colspan="3">0</td>
+                    <td colspan="5">-1</td>
+                </tr>
+            </table>
+        {% endblock %}
+    </body>
+</html>

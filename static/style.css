@@ -128,3 +128,25 @@ p{
 h2{
     text-align: center;
 }
+
+#rules{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-collapse: collapse;
+    border: 2px solid white;
+    color:white;
+}
+
+#rules tr{
+    border: 2px solid white
+}
+
+#rules img{
+    height: 96.8px;
+    width: 66.6px;
+}
+
+#rules td{
+    border: 2px solid white
+}
