@@ -1,0 +1,14 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: {{ .Values.volume.name }}
+  labels:
+    type: {{ .Values.volume.type }}
+spec:
+  capacity:
+    storage: 4Gi
+  accessModes:
+    - {{ .Values.volume.accessmodes }}
+  awsElasticBlockStore:
+    volumeID: {{ .Values.volume.id }}
+    fsType: {{ .Values.volume.fstype }}

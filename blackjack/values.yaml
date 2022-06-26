@@ -13,3 +13,11 @@ express:
   image: "mongo-express"
   port: 8081
   
+volume:
+  storageclass: "gp2"
+  id: "vol-0dac41d251a59aebe"
+  fstype: "ext4"
+  type: "amazonEBS"
+  name: mongo-pv
+  claimname: mongo-pv-claim
+  accessmodes: "ReadWriteOnce"

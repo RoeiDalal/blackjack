@@ -1,0 +1,10 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: {{ .Values.volume.storageclass }}
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: {{ .Values.volume.storageclass }}
+reclaimPolicy: Retain
+mountOptions:
+  - debug

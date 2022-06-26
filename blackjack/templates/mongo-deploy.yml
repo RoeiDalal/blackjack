@@ -14,11 +14,18 @@ spec:
       labels:
         app: {{ .Values.mongo.name }}
     spec:
+      volumes:
+        - name: mongo-pv-storage
+          persistentVolumeClaim:
+            claimName: mongo-pv-claim
       containers:
       - name: {{ .Values.mongo.name }}
         image: {{ .Values.mongo.image }}
         ports:
         - containerPort: {{ .Values.mongo.port }}
+        volumeMounts:
+        - name: mongo-pv-storage
+          mountPath: /data/db
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
           valueFrom:
